@@ -1,0 +1,26 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Creates the user to deploy the bot and its resources",
+  "Resources": {
+    "BotDeployerUser": {
+      "Type": "AWS::IAM::User",
+      "Properties": {
+        "Policies": [{
+          "PolicyName": "Deploy",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "lex:*"
+                ],
+                "Resource": "*"
+              }
+            ]
+          }
+        }]
+      }
+    }
+  }
+}
