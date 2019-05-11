@@ -1,0 +1,40 @@
+{
+  "name": "MyIntentName",
+  "description": "My Intent Description",
+  "sampleUtterances": [
+    "I would like to book a flight to Europe",
+    "I want to fly somewhere in Europe"
+  ],
+  "slots": [
+    {
+      "name": "Location",
+      "description": "The location the user wants to fly to",
+      "slotConstraint": "Required",
+      "slotType": "AMAZON.EUROPE_CITY",
+      "valueElicitationPrompt": {
+        "messages": [
+          {
+            "contentType": "PlainText",
+            "content": "Which European city do you want to fly to?"
+          }
+        ],
+        "maxAttempts": 5
+      }
+    }
+  ],
+  "fulfillmentActivity": {
+    "type": "ReturnIntent"
+  },
+  "conclusionStatement": {
+    "messages": [
+      {
+        "contentType": "PlainText",
+        "content": "Booking a flight to {Location}"
+      },
+      {
+        "contentType": "PlainText",
+        "content": "A flight to {Location} will be booked"
+      }
+    ]
+  }
+}

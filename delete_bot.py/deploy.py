@@ -1,11 +1,10 @@
 import sys
-import bot
-import intents
+import deploy_bot
+import deploy_intents
 
-#TODO Add support for version
 def deploy(bot_name, intents_dir):
-    deployed_intent_names = intents.deploy(intents_dir=intents_dir)
-    bot.deploy(bot_name=bot_name, intents=deployed_intent_names)
+    deployed_intent_names = deploy_intents.deploy(intents_dir=intents_dir)
+    deploy_bot.deploy(bot_name=bot_name, intents=deployed_intent_names)
 
 if __name__ == "__main__":
     args = sys.argv[1:]
