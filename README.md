@@ -20,6 +20,16 @@ source ./venv-lex-bot/bin/activate
 pip install -r requirements.txt
 ```
 
+### AWS Setup
+In the AWS console:
+1. Deploy the CloudFormation script `cloudformation/deployer_user.py` - this will create a new user
+1. Go into the IAM Service
+1. Click on Users from the left hand side
+1. Select the user created
+1. Click on Security Credentials
+1. Create and Download Access Key
+1. Use this Access Key to create credentials on your laptop at `~/.aws/credentials` - as seen in the [AWS setup credentials guide](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html).
+
 ### Deploy
 This script takes two parameters:
 1. The bot name
