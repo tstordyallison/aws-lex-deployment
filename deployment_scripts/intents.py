@@ -18,7 +18,11 @@ def deploy(intents_dir, _client=boto3.client):
             raise Exception("Intent config file MISSING at path %s" % intent_config_path)
 
         with open(intent_config_path) as cfg_file:
-            config = json.load(cfg_file)
+            cfg_file_content = cfg_file.read()
+            cfg_file_content = cfg_file_content.replace("{ReplaceWithAWSRegion}", os.environ["AWS_DEFAULT_REGION"])
+            cfg_file_content = cfg_file_content.replace("{ReplaceWithAWSAccountId}", _client("sts").get_caller_identity()["Account"])
+            print(cfg_file_content)
+            config = json.loads(cfg_file_content)
 
         response = client.put_intent(**config)
 

@@ -1,9 +1,11 @@
-import sys
 import bot
 import intents
+import intent_lambda
+import sys
 
 #TODO Add support for version
 def deploy(bot_name, intents_dir):
+    intent_lambda.deploy(intents_dir=intents_dir)
     deployed_intent_names = intents.deploy(intents_dir=intents_dir)
     bot.deploy(bot_name=bot_name, intents=deployed_intent_names)
 
