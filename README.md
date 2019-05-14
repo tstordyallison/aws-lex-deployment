@@ -1,7 +1,7 @@
 # AWS Lex Deployment
 
 ## Description
-Using the [AWS Boto Library](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/lex-models.html) deploy an AWS Lex Bot and Intents.
+Using the [AWS Boto Library](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/lex-models.html) and [AWS Sample Bot Deployer](https://github.com/aws-samples/amazon-lex-bot-deploy) to deploy an AWS Lex Bot and Intents.
 
 This code assumes there is one version of the code, $LATEST.  Versioning of bot and intents should be added.
 

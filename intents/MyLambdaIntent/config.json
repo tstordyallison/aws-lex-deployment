@@ -1,5 +1,5 @@
 {
-  "name": "MyLambdaIntent",
+  "name": "{ReplaceWithIntentName}",
   "description": "My Lambda Intent Description",
   "sampleUtterances": [
     "I would like to book a hotel in Europe",
@@ -25,7 +25,7 @@
   "fulfillmentActivity": {
     "type": "CodeHook",
     "codeHook": {
-      "uri": "arn:aws:lambda:{ReplaceWithAWSRegion}:{ReplaceWithAWSAccountId}:function:MyLambdaIntent-Lambda",
+      "uri": "arn:aws:lambda:{ReplaceWithAWSRegion}:{ReplaceWithAWSAccountId}:function:{ReplaceWithIntentName}-Lambda",
       "messageVersion": "1.0"
     }
   },

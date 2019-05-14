@@ -1,5 +1,5 @@
 {
-  "name": "MyIntentName",
+  "name": "{ReplaceWithIntentName}",
   "description": "My Intent Description",
   "sampleUtterances": [
     "I would like to book a flight to Europe",
