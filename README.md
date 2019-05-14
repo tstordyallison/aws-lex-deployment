@@ -1,5 +1,13 @@
 # AWS Lex Deployment
 
+## TODO
+* Lambda Deployment
+* Use ArgParse instead of just taking script arg location
+* Add unit testing for deployment_scripts
+* Add acceptance testing for intents, using [The Robot Framework](https://robotframework.org/)
+* Add bot name to the intent - helps with multiple people deploying code and tearing down bots
+* Add versioning capability - pass in specific version of the bot to create
+
 ## Description
 Using the [AWS Boto Library](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/lex-models.html) and [AWS Sample Bot Deployer](https://github.com/aws-samples/amazon-lex-bot-deploy) to deploy an AWS Lex Bot and Intents.
 
@@ -31,11 +39,12 @@ In the AWS console:
 1. Use this Access Key to create credentials on your laptop at `~/.aws/credentials` - as seen in the [AWS setup credentials guide](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html).
 
 ### Deploy
-This script takes two parameters:
+This script takes three parameters:
 1. The bot name
+1. The path to the bot config file
 1. The directory location on where the intent config files are
 ```
-AWS_DEFAULT_PROFILE=ffg-lex-bot AWS_DEFAULT_REGION=eu-west-1 python deployment_scripts/deploy.py MyBotName ./intents
+AWS_DEFAULT_PROFILE=ffg-lex-bot AWS_DEFAULT_REGION=eu-west-1 python deployment_scripts/deploy.py MyBotName ./bot/bot-config.json ./intents
 ```
 
 ### Delete
@@ -50,4 +59,3 @@ AWS_DEFAULT_PROFILE=ffg-lex-bot AWS_DEFAULT_REGION=eu-west-1 python deployment_s
 Under the intents directory:
 * create a directory called the intent name
 * create a file called config.json and create a JSON dict of the parameters for the [put_intent](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/lex-models.html#LexModelBuildingService.Client.put_intent) Boto function.
-* TODO
