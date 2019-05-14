@@ -1,2 +1,2 @@
+amazon-lex-bot-deploy
 boto3
-zipfile
