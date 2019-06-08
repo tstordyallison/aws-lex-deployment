@@ -7,18 +7,15 @@ This code assumes there is one version of the code, $LATEST.  Versioning of bot 
 
 ## Development
 ### Environment Setup
-Install pip and virtualenv using the instructions at https://virtualenv.pypa.io/en/latest/installation/.
+Install pipenv from https://docs.pipenv.org/en/latest/. 
+
 Run the following from your terminal:
 ```
-#Create a virtual environment
-virtualenv venv-lex-bot
-
-#Activate the virtual environment
-source ./venv-lex-bot/bin/activate
-
-#Install project requirements
-pip install -r requirements.txt
+pipenv install
+pipenv shell
 ```
+
+This will pull your dependencies from pypi and then active the `virtualenv` for your current shell.
 
 ### AWS Setup
 In the AWS console:
@@ -31,13 +28,14 @@ In the AWS console:
 1. Use this Access Key to create credentials on your laptop at `~/.aws/credentials` - as seen in the [AWS setup credentials guide](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html).
 
 ### Deploy
+Deploy the intents to a brand new bot in AWS from source. 
+
 This script takes two parameters:
 1. The bot name
-1. The directory location on where the intent config files are
+1. The directory location on where the intent config files are.
 ```
-AWS_DEFAULT_PROFILE=ffg-lex-bot AWS_DEFAULT_REGION=eu-west-1 python deployment_scripts/deploy.py MyBotName ./intents
+AWS_DEFAULT_PROFILE=ffg-lex-bot AWS_DEFAULT_REGION=eu-west-1 python deployment_scripts/deploy.py MyBotName ./example-bot
 ```
-
 ### Delete
 This script takes two parameters:
 1. The bot name
