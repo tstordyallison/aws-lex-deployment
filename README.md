@@ -42,8 +42,9 @@ This script takes two parameters:
 1. The directory location on where the intent config files are.
 
 ```
-AWS_DEFAULT_PROFILE=ffg-lex-bot AWS_DEFAULT_REGION=eu-west-1 python deployment_scripts/deploy.py MyBotName ./example-bot
+AWS_DEFAULT_PROFILE=ffg-lex-bot AWS_DEFAULT_REGION=eu-west-1 python -m aws_lex_deployment.deploy MyBotName ./example-bot
 ```
+
 ### Delete
 
 This script takes two parameters:
@@ -52,7 +53,7 @@ This script takes two parameters:
 1. The comma separated resources you want to delete, options are [bot, intent]
 
 ```
-AWS_DEFAULT_PROFILE=ffg-lex-bot AWS_DEFAULT_REGION=eu-west-1 python deployment_scripts/delete.py MyBotName bot,intent
+AWS_DEFAULT_PROFILE=ffg-lex-bot AWS_DEFAULT_REGION=eu-west-1 python -m aws_lex_deployment.delete MyBotName bot,intent
 ```
 
 ### Define intents

@@ -1,5 +1,5 @@
-import bot
-import intents
+import aws_lex_deployment.bot as bot
+import aws_lex_deployment.intents as intents
 import sys
 import time
 
@@ -30,7 +30,7 @@ if __name__ == "__main__":
     args = sys.argv[1:]
 
     if len(args) != 2:
-        raise AssertionError("Expecting 1 argument, usage:python ./deployment_scripts/delete.py <bot_name> <what_do_delete>")
+        raise AssertionError("Expecting 1 argument, usage:python ./aws_lex_deployment/delete.py <bot_name> <what_do_delete>")
 
     delete(
         bot_name=args[0],

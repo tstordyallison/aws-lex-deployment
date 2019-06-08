@@ -1,6 +1,6 @@
-import bot
-import intents
-import intent_lambda
+import aws_lex_deployment.bot as bot
+import aws_lex_deployment.intents as intents
+import aws_lex_deployment.intent_lambda as intent_lambda
 import sys
 
 #TODO Add support for version
@@ -13,7 +13,7 @@ if __name__ == "__main__":
     args = sys.argv[1:]
 
     if len(args) != 2:
-        raise AssertionError("Expecting 2 arguments, usage:python ./deployment_scripts/deploy.py <bot_name> <intents_dir>")
+        raise AssertionError("Expecting 2 arguments, usage:python ./aws_lex_deployment/deploy.py <bot_name> <intents_dir>")
 
     deploy(
         bot_name=args[0],
