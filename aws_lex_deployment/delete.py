@@ -2,37 +2,43 @@ import aws_lex_deployment.bot as bot
 import aws_lex_deployment.intents as intents
 import sys
 import time
+import argparse
+import botocore
 
 #TODO Add support for version
-def delete(bot_name, what_to_delete):
-    intents_to_delete = []
+def delete(bot_name, bot_only):
+    ''' Delete the bot. If requested, also delete the intents associated. '''
 
-    '''
-        TODO Rather than delete bot before intents, remove intents from bot.
-        Otherwise you could be in a state where intents could fail to delete and you don't know which
-        intents were associated to which bot.
-    '''
-    if "intent" in what_to_delete:
-        bot_desc = bot.get(bot_name=bot_name)
-        intents_to_delete = [i["intentName"] for i in bot_desc["intents"]]
+    bot_desc = bot.get(bot_name=bot_name)
+    bot.delete(bot_name=bot_name)
 
-    if "bot" in what_to_delete:
-        bot.delete(bot_name=bot_name)
+    deleted_intents  = []
+    if not bot_only:
+        for intent in bot_desc["intents"]:
+            intent_name = intent["intentName"]
+            deleted_intents.append(intent_name)
 
-    if intents_to_delete:
-        #Wait while intents get detached from bot
-        time.sleep(15)
-        intents.delete(intent_names=intents_to_delete)
+            for _ in range(3):
+                try:
+                    intents.delete(intent_name)
+                    break
+                except botocore.exceptions.ClientError as err:
+                    if err.response['Error']['Code'] == 'ConflictException':
+                         time.sleep(1)
+                    else:
+                        raise
 
-    print("Deleted resources %s for %s" % (str(what_to_delete), bot_name))
+    print(f"Deleted bot {bot_name} and {deleted_intents} intents.")
 
 if __name__ == "__main__":
-    args = sys.argv[1:]
+    parser = argparse.ArgumentParser(description='Delete a bot from Lex.')
 
-    if len(args) != 2:
-        raise AssertionError("Expecting 1 argument, usage:python ./aws_lex_deployment/delete.py <bot_name> <what_do_delete>")
+    parser.add_argument('bot_name', help='The name of the bot to delete.')
+    parser.add_argument('--bot_only', dest='bot_only', action="store_true", default=False, help="Only remobve the bot, leave the intents.")
+
+    args = parser.parse_args()
 
     delete(
-        bot_name=args[0],
-        what_to_delete=args[1].split(",")
+        bot_name=args.bot_name,
+        bot_only=args.bot_only
     )
