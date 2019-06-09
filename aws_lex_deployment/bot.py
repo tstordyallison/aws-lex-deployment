@@ -3,7 +3,11 @@ import botocore
 
 CLIENT_NAME="lex-models"
 
-def get(bot_name):
+def get(bot_name, instance=None):
+    ''' Get the bot by name. Returns None if missing. '''
+    if instance:
+        bot_name = instance + '_' + bot_name
+
     try:
         client = boto3.client(CLIENT_NAME)
         return client.get_bot(name=bot_name, versionOrAlias="$LATEST")
@@ -53,26 +57,6 @@ def deploy(bot_name, intents, instance=None):
 
     _response = client.put_bot(**bot)
     print("Created/Updated bot %s." % bot_name)
-
-
-def remove_intent(bot_name, intent_name_to_remove):
-    current_bot = get(bot_name)
-    if current_bot:
-        intents = []
-        for intent in current_bot['intents']:
-            if not intent['intentName'] == intent_name_to_remove:
-                intents.append(intent)
-        current_bot['intents'] = intents
-
-    current_bot.pop('ResponseMetadata')
-    current_bot.pop('status')
-    current_bot.pop('lastUpdatedDate')
-    current_bot.pop('createdDate')
-    current_bot.pop('version')    
-
-    client = boto3.client(CLIENT_NAME)
-    client.put_bot(**current_bot)
-
 
 def delete(bot_name):
     client = boto3.client(CLIENT_NAME)

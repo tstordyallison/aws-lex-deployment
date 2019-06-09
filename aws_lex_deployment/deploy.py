@@ -6,6 +6,8 @@ import os
 import argparse
 
 #TODO Add support for version
+#TODO Add bot metadata upload
+
 def deploy(bot_dir, instance=None):
     _, bot_name = os.path.split(os.path.normpath(bot_dir))
     intent_lambda.deploy(intents_dir=bot_dir, instance=instance)

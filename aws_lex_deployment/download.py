@@ -5,8 +5,9 @@ import sys
 import os
 import argparse
 
-#TODO Add support for version
-#TODO Add bot metadata download
+#TODO: Add support for version
+#TODO: Add bot metadata download
+#TODO: Support some sort of diff to delete intents that are gone remotely
 
 def download(bot_dir, instance=None):
     ''' Download an bot from Lex, or update a local one after making changes online.'''
@@ -17,6 +18,7 @@ def download(bot_dir, instance=None):
     
     intent_names = [ intent['intentName' ] for intent in current_bot['intents'] ]
     for intent_name in intent_names:
+        print(f'Downloading intent {intent_name}')
         intents.download(intent_name, bot_dir, instance=instance)
         #intent_lambda.download(intent_name, bot_dir)
     

@@ -1,44 +1,44 @@
 {
-  "name": "MyLambdaIntent",
-  "description": "My Lambda Intent Description",
-  "sampleUtterances": [
-    "I would like to book a hotel in Europe",
-    "I want a hotel somewhere in Europe"
-  ],
-  "slots": [
-    {
-      "name": "Location",
-      "description": "The location the user wants a hotel in",
-      "slotConstraint": "Required",
-      "slotType": "AMAZON.EUROPE_CITY",
-      "valueElicitationPrompt": {
+    "name": "MyLambdaIntent",
+    "description": "My Lambda Intent Description",
+    "slots": [
+        {
+            "name": "Location",
+            "description": "The location the user wants a hotel in",
+            "slotConstraint": "Required",
+            "slotType": "AMAZON.EUROPE_CITY",
+            "valueElicitationPrompt": {
+                "messages": [
+                    {
+                        "contentType": "PlainText",
+                        "content": "Which European city do you want a hotel in?"
+                    }
+                ],
+                "maxAttempts": 5
+            }
+        }
+    ],
+    "sampleUtterances": [
+        "I would like to book a hotel in Europe",
+        "I want a hotel somewhere in Europe"
+    ],
+    "conclusionStatement": {
         "messages": [
-          {
-            "contentType": "PlainText",
-            "content": "Which European city do you want a hotel in?"
-          }
-        ],
-        "maxAttempts": 5
-      }
+            {
+                "contentType": "PlainText",
+                "content": "Booking a hotel in {Location}"
+            },
+            {
+                "contentType": "PlainText",
+                "content": "A hotel in {Location} will be booked"
+            }
+        ]
+    },
+    "fulfillmentActivity": {
+        "type": "CodeHook",
+        "codeHook": {
+            "uri": "arn:aws:lambda:eu-west-1:605488488652:function:TSAMyLambdaIntent-Lambda",
+            "messageVersion": "1.0"
+        }
     }
-  ],
-  "fulfillmentActivity": {
-    "type": "CodeHook",
-    "codeHook": {
-      "uri": "arn:aws:lambda:{ReplaceWithAWSRegion}:{ReplaceWithAWSAccountId}:function:MyLambdaIntent-Lambda",
-      "messageVersion": "1.0"
-    }
-  },
-  "conclusionStatement": {
-    "messages": [
-      {
-        "contentType": "PlainText",
-        "content": "Booking a hotel in {Location}"
-      },
-      {
-        "contentType": "PlainText",
-        "content": "A hotel in {Location} will be booked"
-      }
-    ]
-  }
 }
